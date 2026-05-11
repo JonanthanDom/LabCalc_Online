@@ -44,3 +44,4 @@ def calcular_proteinuria(
             status_code=400,
             detail="Valor numérico inválido."
         )
+    

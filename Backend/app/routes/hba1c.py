@@ -69,3 +69,4 @@ def calcular_hba1c(
             status_code=400,
             detail="Valor numérico inválido."
         )
+    
