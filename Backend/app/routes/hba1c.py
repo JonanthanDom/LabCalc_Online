@@ -1,6 +1,7 @@
+from fastapi import APIRouter, HTTPException
 from typing import Optional
 
-from fastapi import APIRouter, HTTPException
+from Backend.app.services.bioquimica import calcular_hba1c_service
 
 router = APIRouter()
 
@@ -11,14 +12,10 @@ def calcular_hba1c(
     ifcc_mmol_mol: Optional[str] = None,
 ):
 
-    # Conta quantos campos foram preenchidos
-    campos_preenchidos = sum(
-        valor is not None
-        for valor in [hba1c_percent, ifcc_mmol_mol]
-    )
+    # validação: apenas 1 campo
+    campos = sum(v is not None for v in [hba1c_percent, ifcc_mmol_mol])
 
-    # Deve preencher apenas UM campo
-    if campos_preenchidos != 1:
+    if campos != 1:
 
         raise HTTPException(
             status_code=400,
@@ -27,41 +24,29 @@ def calcular_hba1c(
 
     try:
 
-        # -----------------------------------
-        # Se preencher HbA1c %
-        # -----------------------------------
+        # parsing
+        hba1c_float = None
+        ifcc_float = None
+
         if hba1c_percent is not None:
 
-            hba1c = float(
+            hba1c_float = float(
                 hba1c_percent.replace(",", ".")
             )
 
-            ifcc = (10.93 * hba1c) - 23.5
+        if ifcc_mmol_mol is not None:
 
-        # -----------------------------------
-        # Se preencher IFCC mmol/mol
-        # -----------------------------------
-        elif ifcc_mmol_mol is not None:
-
-            ifcc = float(
+            ifcc_float = float(
                 ifcc_mmol_mol.replace(",", ".")
             )
 
-            hba1c = (ifcc + 23.5) / 10.93
+        # service
+        resultado = calcular_hba1c_service(
+            hba1c_float,
+            ifcc_float
+        )
 
-        # -----------------------------------
-        # Glicemia média estimada
-        # -----------------------------------
-        eag = (28.7 * hba1c) - 46.7
-
-        return {
-
-            "hba1c_percent": round(hba1c, 2),
-
-            "ifcc_mmol_mol": round(ifcc, 2),
-
-            "glicemia_media_estimada_mgdl": round(eag, 2)
-        }
+        return resultado
 
     except ValueError:
 
@@ -69,4 +54,3 @@ def calcular_hba1c(
             status_code=400,
             detail="Valor numérico inválido."
         )
-    
