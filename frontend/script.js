@@ -1,4 +1,4 @@
-const API_URL = "https://labcalc-online.onrender.com/api";
+const API_URL = "https://labcalc-online.onrender.com";
 
 
 /* =========================
