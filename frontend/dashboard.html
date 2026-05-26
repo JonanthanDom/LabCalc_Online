@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>LabCalc</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- MENU MOBILE -->
+  <button class="menu-toggle" id="menuToggle">
+    ☰
+  </button>
+
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+      <div class="logo">
+        <h1>LabCalc</h1>
+        <p>Calculadoras Clínicas</p>
+      </div>
+
+      <nav class="menu">
+
+        <button class="menu-item active" data-target="hba1c">
+          HbA1c
+        </button>
+
+        <button class="menu-item" data-target="proteinuria">
+          Proteinúria 24h
+        </button>
+
+        <button class="menu-item" data-target="rpc">
+          Relação Prot/Creat
+        </button>
+
+      </nav>
+
+      <button class="logout-btn" onclick="logout()">
+        Sair
+      </button>
+
+    </aside>
+
+    <!-- CONTEÚDO -->
+    <main class="content">
+
+      <!-- HBA1C -->
+      <section class="card calculadora active" id="hba1c">
+
+        <h2>HbA1c</h2>
+
+        <div class="input-group">
+          <label>HbA1c (%)</label>
+          <input type="text" id="hba1c_percent" placeholder="Ex: 7">
+        </div>
+
+        <div class="input-group">
+          <label>HbA1c IFCC (mmol/mol)</label>
+          <input type="text" id="ifcc_mmol_mol" placeholder="Ex: 53">
+        </div>
+
+        <button onclick="calcularHba1c()">
+          Calcular
+        </button>
+
+        <div class="resultado" id="resultado_hba1c">
+          Resultado aparecerá aqui.
+        </div>
+
+      </section>
+
+      <!-- PROTEINURIA -->
+      <section class="card calculadora" id="proteinuria">
+
+        <h2>Proteinúria 24h</h2>
+
+        <div class="input-group">
+          <label>Volume urinário (mL)</label>
+          <input type="text" id="volume_ml" placeholder="Ex: 2000">
+        </div>
+
+        <div class="input-group">
+          <label>Proteína (mg/dL)</label>
+          <input type="text" id="proteina_mgdl_24h" placeholder="Ex: 150">
+        </div>
+
+        <button onclick="calcularProteinuria()">
+          Calcular
+        </button>
+
+        <div class="resultado" id="resultado_proteinuria">
+          Resultado aparecerá aqui.
+        </div>
+
+      </section>
+
+      <!-- RPC -->
+      <section class="card calculadora" id="rpc">
+
+        <h2>Relação Proteína/Creatinina</h2>
+
+        <div class="input-group">
+          <label>Proteína (mg/dL)</label>
+          <input type="text" id="proteina_rpc" placeholder="Ex: 120">
+        </div>
+
+        <div class="input-group">
+          <label>Creatinina (mg/dL)</label>
+          <input type="text" id="creatinina_rpc" placeholder="Ex: 80">
+        </div>
+
+        <button onclick="calcularRPC()">
+          Calcular
+        </button>
+
+        <div class="resultado" id="resultado_rpc">
+          Resultado aparecerá aqui.
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

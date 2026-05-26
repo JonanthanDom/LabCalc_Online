@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from Backend.app.routes.hba1c import router as hba1c_router
-from Backend.app.routes.proteinuria24h import router as proteinuria_router
-from Backend.app.routes.relacao_prot_creatinina import router as rpc_router
+from backend.app.routes.hba1c import router as hba1c_router
+from backend.app.routes.proteinuria24h import router as proteinuria_router
+from backend.app.routes.relacao_prot_creatinina import router as rpc_router
 
 app = FastAPI()
 

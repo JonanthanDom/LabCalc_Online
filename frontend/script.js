@@ -1,6 +1,64 @@
 const API_URL = "http://127.0.0.1:8000";
 
 /* =========================
+   LOGIN
+========================= */
+
+function login() {
+
+  const usuario = document.getElementById("usuario");
+  const senha = document.getElementById("senha");
+
+  if (!usuario || !senha) {
+    return;
+  }
+
+  if (
+    usuario.value.trim() === "" ||
+    senha.value.trim() === ""
+  ) {
+
+    document.getElementById("resultado_login").innerHTML = `
+      <span class="erro">
+        Preencha usuário e senha.
+      </span>
+    `;
+
+    return;
+  }
+
+  localStorage.setItem("labcalc_logado", "true");
+
+  window.location.href = "dashboard.html";
+}
+
+/* =========================
+   VERIFICA LOGIN
+========================= */
+
+if (
+  window.location.pathname.includes("dashboard.html")
+) {
+
+  const logado = localStorage.getItem("labcalc_logado");
+
+  if (logado !== "true") {
+    window.location.href = "index.html";
+  }
+}
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logout() {
+
+  localStorage.removeItem("labcalc_logado");
+
+  window.location.href = "index.html";
+}
+
+/* =========================
    MENU RESPONSIVO
 ========================= */
 

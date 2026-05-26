@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from typing import Optional
 
-from Backend.app.services.bioquimica import calcular_hba1c_service
+from backend.app.services.bioquimica import calcular_hba1c_service
 
 router = APIRouter()
 
