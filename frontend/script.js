@@ -6,7 +6,7 @@ async function pingServidor() {
 
     try {
 
-        const response = await fetch(`${API_URL}/ping`);
+        const response = await fetch(`https://labcalc-online.onrender.com/ping`);
 
         const data = await response.json();
 
