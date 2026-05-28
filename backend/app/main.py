@@ -25,6 +25,9 @@ app.add_middleware(
 def home():
     return {"LabCalc": "online"}
 
+@app.get("/ping")
+def ping():
+    return {"status": "awake"}
 
 app.include_router(hba1c_router)
 app.include_router(proteinuria_router)
