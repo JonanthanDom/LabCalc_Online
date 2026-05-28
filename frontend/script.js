@@ -21,7 +21,7 @@ async function pingServidor() {
 
 window.addEventListener("load", pingServidor);
 
-setInterval(pingServidor, 4000);
+setInterval(pingServidor, 60000);
 
 /* =========================
    LOGIN
