@@ -2,20 +2,24 @@ const API_URL = "https://labcalc-online.onrender.com";
 
 async function pingServidor() {
 
+    console.log("Enviando ping...");
+
     try {
 
-        await fetch(`${API_URL}/ping`);
+        const response = await fetch(`${API_URL}/ping`);
 
-        console.log("Servidor ativo");
+        const data = await response.json();
+
+        console.log("Ping OK:", data);
 
     } catch (error) {
 
-        console.log("Erro ao pingar servidor");
+        console.log("Erro:", error);
 
     }
 }
 
-setInterval(pingServidor, 40);
+pingServidor();
 
 
 /* =========================
