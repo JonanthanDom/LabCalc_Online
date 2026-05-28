@@ -16,7 +16,7 @@ def keep_alive():
     while True:
 
         try:
-            requests.get("https://SEUAPP.onrender.com/ping")
+            requests.get("https://labcalc-online.onrender.com/ping")
             print("Ping enviado")
 
         except Exception as e:
