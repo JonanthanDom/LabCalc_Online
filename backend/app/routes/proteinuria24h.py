@@ -1,18 +1,18 @@
 from typing import Optional
-
 from fastapi import APIRouter, HTTPException
+from services.bioquimica import calcular_proteinuria_service
 
 router = APIRouter()
 
 
 @router.get("/proteinuria24h")
 def calcular_proteinuria(
-    volume_ml: Optional[str] = None,
+    volume_ml_24h: Optional[str] = None,
     proteina_mgdl: Optional[str] = None,
 ):
 
     # Verifica campos vazios
-    if volume_ml is None or proteina_mgdl is None:
+    if not volume_ml_24h or not proteina_mgdl:
 
         raise HTTPException(
             status_code=400,
@@ -22,22 +22,19 @@ def calcular_proteinuria(
     try:
 
         # Aceita vírgula ou ponto
-        volume = float(volume_ml.replace(",", "."))
+        volume_ml_24h = float(volume_ml_24h.replace(",", "."))
 
-        proteina = float(proteina_mgdl.replace(",", "."))
+        proteina_mgdl = float(proteina_mgdl .replace(",", "."))
 
-        # Cálculo
-        resultado = (volume * proteina) / 100
+               # service
+        resultado_proteinuria = calcular_proteinuria_service(
+            volume_ml_24h,
+            proteina_mgdl
+        )
+        return resultado_proteinuria
+    
 
-        return {
-
-            "volume_ml_24h": round(volume, 2),
-
-            "proteina_mgdl": round(proteina, 2),
-
-            "proteinuria_24h_mg": round(resultado, 2)
-        }
-
+      
     except ValueError:
 
         raise HTTPException(

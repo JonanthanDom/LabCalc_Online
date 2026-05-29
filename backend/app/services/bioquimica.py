@@ -41,3 +41,31 @@ def calcular_proteinas_tf_service(albumina_gdl: float, proteina_gdl: float):
         "proteina_total_gdl": round(proteina_gdl, 2)
     }
     return None
+
+#--------------------------------
+#calculo de proteinuria 24h
+#--------------------------------
+def calcular_proteinuria_service(volume_ml_24h: float, proteina_mgdl: float):
+
+        # Cálculo
+        resultado = (volume_ml_24h * proteina_mgdl) / 100
+
+        return {
+
+            "proteinuria_24h_mg": round(resultado, 2)
+        }
+        return None
+
+#--------------------------------
+#calculo de relação proteína/creatinina
+#--------------------------------
+def calcular_relacao_prot_creatinina_service(proteina_mgdl: float, creatinina_mgdl: float):
+        
+        # Cálculo
+        rpc = proteina_mgdl / creatinina_mgdl
+
+        return {
+
+            "relacao_proteina_creatinina": round(rpc, 3)
+        }
+        return None

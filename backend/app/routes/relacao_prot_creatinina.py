@@ -1,6 +1,6 @@
 from typing import Optional
-
 from fastapi import APIRouter, HTTPException
+from services.bioquimica import calcular_relacao_prot_creatinina_service             
 
 router = APIRouter()
 
@@ -12,7 +12,7 @@ def calcular_rpc(
 ):
 
     # Verifica campos vazios
-    if proteina_mgdl is None or creatinina_mgdl is None:
+    if not proteina_mgdl or not creatinina_mgdl:
 
         raise HTTPException(
             status_code=400,
@@ -38,17 +38,7 @@ def calcular_rpc(
                 detail="Creatinina não pode ser zero."
             )
 
-        # Cálculo
-        rpc = proteina / creatinina
-
-        return {
-
-            "proteina_mgdl": round(proteina, 2),
-
-            "creatinina_mgdl": round(creatinina, 2),
-
-            "relacao_proteina_creatinina": round(rpc, 2)
-        }
+        return calcular_relacao_prot_creatinina_service(proteina, creatinina)
 
     except ValueError:
 

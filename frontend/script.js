@@ -203,12 +203,13 @@ async function calcularProteinuria() {
   const volume = document.getElementById("volume_ml").value;
   const proteina = document.getElementById("proteina_mgdl_24h").value;
 
-  const url = `${API_URL}/proteinuria24h?volume_ml=${encodeURIComponent(volume)}&proteina_mgdl=${encodeURIComponent(proteina)}`;
+  const url = `${API_URL}/proteinuria24h?volume_ml_24h=${encodeURIComponent(volume)}&proteina_mgdl=${encodeURIComponent(proteina)}`;
 
   try {
 
     const response = await fetch(url);
     const data = await response.json();
+    console.log(data);
 
     if (!response.ok) {
       throw new Error(data.detail);

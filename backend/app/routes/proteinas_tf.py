@@ -1,6 +1,5 @@
 from fastapi import APIRouter, HTTPException
 from typing import Optional
-
 from services.bioquimica import calcular_proteinas_tf_service
                                 
 
