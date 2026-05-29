@@ -1,4 +1,9 @@
-const API_URL = "https://labcalc-online.onrender.com";
+const API_URL =
+  window.location.hostname.includes("127.0.0.1") ||
+  window.location.hostname.includes("localhost")
+    ? "http://127.0.0.1:8000"
+    : "https://labcalc-online.onrender.com";
+
 
 async function pingServidor() {
 
@@ -254,3 +259,39 @@ async function calcularRPC() {
     `;
   }
 }
+
+/* =========================
+   PROTEINAS TOTAIS E FRAÇÕES
+========================= */
+
+async function calcularProteinasTF() {
+
+  const proteina = document.getElementById("proteina_gdl").value;
+  const albumina = document.getElementById("albumina_gdl").value;
+
+  const url = `${API_URL}/proteinas_tf?proteina_gdl=${encodeURIComponent(proteina)}&albumina_gdl=${encodeURIComponent(albumina)}`;
+
+  try {
+
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+
+    if (!response.ok) {
+      throw new Error(data.detail);
+    }
+
+    document.getElementById("resultado_proteinas_tf").innerHTML = `
+      <strong>Proteínas Totais:</strong> ${data.proteina_total_gdl} g/dL<br>
+      <strong>Albumina:</strong> ${data.albumina_gdl} g/dL<br>
+      <strong>Globulinas:</strong> ${data.globulina_gdl} g/dL
+    `;
+
+  } catch (error) {
+
+    document.getElementById("resultado_proteinas_tf").innerHTML = `
+      <span class="erro">${error.message}</span>
+    `;
+  }
+}
+ 

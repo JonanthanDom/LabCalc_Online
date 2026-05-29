@@ -28,3 +28,16 @@ def calcular_hba1c_service(hba1c_percent: float = None, ifcc: float = None):
         }
 
     return None
+#--------------------------------
+#calculo de proteinas totais.
+#--------------------------------
+def calcular_proteinas_tf_service(albumina_gdl: float, proteina_gdl: float):
+
+    globulina = proteina_gdl - albumina_gdl
+
+    return {
+        "albumina_gdl": round(albumina_gdl, 2),
+        "globulina_gdl": round(globulina, 2),
+        "proteina_total_gdl": round(proteina_gdl, 2)
+    }
+    return None
