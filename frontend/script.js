@@ -295,4 +295,50 @@ async function calcularProteinasTF() {
     `;
   }
 }
+
+/* =========================
+    CALCIO IÔNICO
+========================= */
+
+async function calcularCalcioIonico() {
+
+  const calcio_proteina = document.getElementById("calcio_proteina_gdl").value;
+  const calcio_albumina = document.getElementById("calcio_albumina_gdl").value;
+  const calcio_total = document.getElementById("calcio_total").value;
+
+  console.log(
+  document.getElementById("calcio_proteina_gdl"),
+  document.getElementById("calcio_albumina_gdl"),
+  document.getElementById("calcio_total")
+);
+
+console.log({
+  calcio_proteina,
+  calcio_albumina,
+  calcio_total
+});
+
+  const url = `${API_URL}/calcio_ionico?calcio_proteina_gdl=${encodeURIComponent(calcio_proteina)}&calcio_albumina_gdl=${encodeURIComponent(calcio_albumina)}&calcio_total=${encodeURIComponent(calcio_total)}`;
+
+  try {
+
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+
+    if (!response.ok) {
+      throw new Error(data.detail);
+    }
+
+    document.getElementById("resultado_calcio_ionico").innerHTML = `
+      <strong>Calcio Iônico:</strong> ${data.calcio_ionico_mgdl} mg/dL
+    `;
+
+  } catch (error) {
+
+    document.getElementById("resultado_calcio_ionico").innerHTML = `
+      <span class="erro">${error.message}</span>
+    `;
+  }
+}
  

@@ -44,6 +44,11 @@
           Proteínas Totais e Frações
         </button>
 
+         <button class="menu-item" data-target="calcio-Ionico">
+          Calcio Ionico
+        </button>
+
+
       </nav>
 
       <button class="logout-btn" onclick="logout()">
@@ -151,6 +156,36 @@
         </button>
 
         <div class="resultado" id="resultado_rpc">
+          Resultado aparecerá aqui.
+        </div>
+
+      </section>
+
+      <!-- CALCIo IONICO -->
+      <section class="card calculadora" id="calcio-Ionico">
+
+        <h2>Calcio Ionico</h2>
+
+        <div class="input-group">
+          <label>Calcio Total (mg/dL)</label>
+          <input type="text" id="calcio_total" placeholder="Ex: 9.5">
+        </div>
+
+         <div class="input-group">
+          <label>Albumina (g/dL)</label>
+          <input type="text" id="calcio_albumina_gdl" placeholder="Ex: 3.5">
+        </div>
+
+        <div class="input-group">
+          <label>Proteina (g/dL)</label>
+          <input type="text" id="calcio_proteina_gdl" placeholder="Ex: 6.5">
+        </div>
+
+        <button onclick="calcularCalcioIonico()">
+          Calcular
+        </button>
+
+        <div class="resultado" id="resultado_calcio_ionico">
           Resultado aparecerá aqui.
         </div>
 

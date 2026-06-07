@@ -69,3 +69,17 @@ def calcular_relacao_prot_creatinina_service(proteina_mgdl: float, creatinina_mg
             "relacao_proteina_creatinina": round(rpc, 3)
         }
         return None
+
+#--------------------------------
+#calculo de calcio ionico   
+#--------------------------------
+def calcular_calcio_ionico_service(calcio_total: float, calcio_albumina_gdl: float, calcio_proteina_gdl: float):
+
+    # Cálculo
+    calcio_ionico = ((6 * calcio_total) - (calcio_albumina_gdl /3)) / (calcio_proteina_gdl +6)
+    return {
+        "calcio_ionico_mgdl": round(calcio_ionico, 2)
+    }
+    return None 
+
+    
