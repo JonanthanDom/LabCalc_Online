@@ -34,11 +34,13 @@ def calcular_hba1c_service(hba1c_percent: float = None, ifcc: float = None):
 def calcular_proteinas_tf_service(albumina_gdl: float, proteina_gdl: float):
 
     globulina = proteina_gdl - albumina_gdl
+    relacao_ag = albumina_gdl / globulina if globulina != 0 else None
 
     return {
         "albumina_gdl": round(albumina_gdl, 2),
         "globulina_gdl": round(globulina, 2),
-        "proteina_total_gdl": round(proteina_gdl, 2)
+        "proteina_total_gdl": round(proteina_gdl, 2),
+        "relacao_ag": round(relacao_ag, 2) if relacao_ag is not None else None
     }
     return None
 
@@ -76,9 +78,11 @@ def calcular_relacao_prot_creatinina_service(proteina_mgdl: float, creatinina_mg
 def calcular_calcio_ionico_service(calcio_total: float, calcio_albumina_gdl: float, calcio_proteina_gdl: float):
 
     # Cálculo
-    calcio_ionico = ((6 * calcio_total) - (calcio_albumina_gdl /3)) / (calcio_proteina_gdl +6)
+    calcio_ionico = ((6 * calcio_total) - ((0.19 * calcio_proteina_gdl) + calcio_albumina_gdl) /3) / ((0.19 * calcio_proteina_gdl) + calcio_albumina_gdl + 6)
+    calcio_ionico_mmol_l = calcio_ionico / 4
     return {
-        "calcio_ionico_mgdl": round(calcio_ionico, 2)
+        "calcio_ionico_mgdl": round(calcio_ionico, 2),
+        "calcio_ionico_mmol_l": round(calcio_ionico_mmol_l, 2)
     }
     return None 
 

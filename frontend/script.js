@@ -283,9 +283,8 @@ async function calcularProteinasTF() {
     }
 
     document.getElementById("resultado_proteinas_tf").innerHTML = `
-      <strong>Proteínas Totais:</strong> ${data.proteina_total_gdl} g/dL<br>
-      <strong>Albumina:</strong> ${data.albumina_gdl} g/dL<br>
-      <strong>Globulinas:</strong> ${data.globulina_gdl} g/dL
+      <strong>Globulinas:</strong> ${data.globulina_gdl} g/dL<br>
+      <strong>Relação A/G:</strong> ${data.relacao_ag}
     `;
 
   } catch (error) {
@@ -331,7 +330,8 @@ console.log({
     }
 
     document.getElementById("resultado_calcio_ionico").innerHTML = `
-      <strong>Calcio Iônico:</strong> ${data.calcio_ionico_mgdl} mg/dL
+      <strong>Calcio Iônico:</strong> ${data.calcio_ionico_mgdl} mg/dL<br>
+      <strong>Calcio Iônico:</strong> ${data.calcio_ionico_mmol_l} mmol/L
     `;
 
   } catch (error) {
